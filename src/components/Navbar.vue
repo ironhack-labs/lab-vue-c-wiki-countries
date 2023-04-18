@@ -1,0 +1,15 @@
+<template>
+  <div>
+    <nav class="navbar navbar-dark bg-primary mb-3">
+      <div class="container">
+        <a class="navbar-brand" href="/">LAB - WikiCountries</a>
+      </div>
+    </nav>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style scooped></style>
