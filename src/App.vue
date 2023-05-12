@@ -1,13 +1,11 @@
 <template>
-  <div class="app">
-
+  <div className="app">
+    <div className="container">
+      <router-view />
+    </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+  import { RouterView } from "vue-router";
 </script>
-
-<style>
-
-</style>
