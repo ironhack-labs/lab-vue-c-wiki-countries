@@ -11,15 +11,9 @@ const routes = [
       {
         path: "/list/:alpha3Code",
         name: "list",
-        component: () => import("../components/CountryDetails.vue"),
-        props: {
-          countriesList: countriesData,
-        },
+        component: () => import("../components/CountryDetails.vue")
       },
-    ],
-    props: {
-      countriesList: countriesData,
-    },
+    ]
   },
 ];
 

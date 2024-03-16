@@ -1,12 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getCountries } from "../components/getCountries.js";
-/* const props = defineProps({
-    countriesList: {
-        type: Array,
-        required: true
-    }
-}); */
+import { getCountries } from "./getFunctions.js";
 
 const countriesData = ref([]);
 
