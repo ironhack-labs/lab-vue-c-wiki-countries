@@ -1,4 +1,4 @@
-async function getCountries() {
+export async function getCountries() {
     try {
         const resp = await fetch("https://ih-countries-api.herokuapp.com/countries");
         if (!resp.ok) {
@@ -11,5 +11,3 @@ async function getCountries() {
         return null;
     }
 }
-
-export default getCountries;
