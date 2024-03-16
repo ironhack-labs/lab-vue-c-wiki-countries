@@ -1,22 +1,7 @@
-<script setup>
-
-</script>
-
 <template>
-    <section class="header-container">
-        <div>Laura Musso</div>
-        <div>Ironhack</div>
-    </section>
+    <nav class="navbar navbar-dark bg-primary mb-3">
+      <div class="container">
+        <a class="navbar-brand" href="/">LAB - WikiCountries</a>
+      </div>
+    </nav>
 </template>
-
-<style scope>
-.header-container {
-    width: 90%;
-    height: 38px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 25px;
-}
-</style>

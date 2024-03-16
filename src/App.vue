@@ -4,23 +4,26 @@ import navbarVue from "@/components/navbar.vue";
 import CountriesListVue from "./components/CountriesList.vue";
 import CountryDetailsVue from "./components/CountryDetails.vue";
 
+
 </script>
 
 <template>
-  <div class="app">
+  <div class="app row">
 
     <!-- {%NAVBAR SECTION} -->
 
-    <navbarVue />
+      <navbarVue />
 
     <!-- {%CountriesListVue SECTION} -->
-
-    <CountriesListVue />
+    <div class="col-5 ">
+      <CountriesListVue />
+    </div>
+  
 
     <!-- {%CountryDetailsVue SECTION} -->
-
-    <CountryDetailsVue />
-
+    <div class="col-7">
+      <CountryDetailsVue />
+    </div>
   </div>
 
 
@@ -32,5 +35,4 @@ import CountryDetailsVue from "./components/CountryDetails.vue";
 body {
   width: 90%;
 }
-
 </style>

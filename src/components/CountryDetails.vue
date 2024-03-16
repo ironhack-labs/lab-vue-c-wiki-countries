@@ -3,9 +3,11 @@
 </script>
 
 <template>
-<h1>hello country details</h1>
+    <div class="row">
+        <section class="col-7">
+            <h1>HOLA</h1>
+        </section>
+    </div>
 </template>
 
-<style scope>
-
-</style>
+<style scoped></style>
