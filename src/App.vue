@@ -1,13 +1,5 @@
-<template>
-  <div class="app">
+<script setup></script>
 
-  </div>
-</template>
+<template></template>
 
-<script>
-
-</script>
-
-<style>
-
-</style>
+<style scoped></style>
