@@ -1,27 +1,28 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
+const countryData = ref([]);
 const route = useRoute();
 
-const countryData = ref([]);
-const alpha3Code = ref('');
-
-const fetchCountryData = async () => {
+// Fetching country data
+onMounted(async () => {
   try {
     const response = await fetch('https://ih-countries-api.herokuapp.com/countries');
     countryData.value = await response.json();
-    alpha3Code.value = route.params.alpha3Code;
   } catch (error) {
     console.error('Error fetching countries:', error);
   }
-};
-
-onMounted(fetchCountryData);
+});
 
 const countryDetails = computed(() => {
   return countryData.value.find(country => country.alpha3Code === route.params.alpha3Code);
 });
+
+const getCountryName = (alpha3Code) => {
+  const country = countryData.value.find(country => country.alpha3Code === alpha3Code);
+  return country ? country.name.common : '';
+};
 </script>
 
 <template>
@@ -29,9 +30,18 @@ const countryDetails = computed(() => {
     <h1>{{ countryDetails.name.common }}</h1>
     <p><strong>Capital:</strong> {{ countryDetails.capital.join(', ') }}</p>
     <p><strong>Area:</strong> {{ countryDetails.area }} km²</p>
+    <p>
+      <strong>Borders:</strong>
+      <span v-if="countryDetails.borders.length > 0">
+        <span v-for="(border, index) in countryDetails.borders" :key="border">
+          <router-link :to="`/${border}`">{{ getCountryName(border) }}</router-link>
+          <span v-if="index !== countryDetails.borders.length - 1">, </span>
+        </span>
+      </span>
+      <span v-else>
+        None
+      </span>
+    </p>
     <!-- Display other details as needed -->
   </div>
 </template>
-
-<style scoped>
-</style>
