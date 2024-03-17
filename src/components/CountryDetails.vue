@@ -1,38 +1,36 @@
 <script setup>
-// import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
+import { useRoute } from 'vue-router';
 
-// const countryDetails = ref({});
+const route = useRoute();
 
-// // Fetch country details when the component is mounted
-// onMounted(() => {
-//   fetchCountryDetails();
-// });
+const countryData = ref([]);
+const alpha3Code = ref('');
 
-// const fetchCountryDetails = async () => {
-//   const alpha3Code = $route.params.alpha3Code; // Access the alpha3Code from the route params
-//   const response = await fetch(`https://ih-countries-api.herokuapp.com/countries/${alpha3Code}`);
-//   countryDetails.value = await response.json();
-// };
+const fetchCountryData = async () => {
+  try {
+    const response = await fetch('https://ih-countries-api.herokuapp.com/countries');
+    countryData.value = await response.json();
+    alpha3Code.value = route.params.alpha3Code;
+  } catch (error) {
+    console.error('Error fetching countries:', error);
+  }
+};
 
-// // Function to get the border countries list
-// const getBorderCountries = () => {
-//   if (countryDetails.value.borders && countryDetails.value.borders.length > 0) {
-//     return countryDetails.value.borders.join(', ');
-//   } else {
-//     return 'No border countries';
-//   }
-// };
+onMounted(fetchCountryData);
+
+const countryDetails = computed(() => {
+  return countryData.value.find(country => country.alpha3Code === route.params.alpha3Code);
+});
 </script>
 
 <template>
-  <!-- <div>
+  <div v-if="countryDetails">
     <h1>{{ countryDetails.name.common }}</h1>
-    <div>
-      <p><strong>Capital:</strong> {{ countryDetails.capital[0] }}</p>
-      <p><strong>Area:</strong> {{ countryDetails.area }} km²</p>
-      <p><strong>Borders:</strong> {{ getBorderCountries() }}</p>
-    </div>
-  </div> -->
+    <p><strong>Capital:</strong> {{ countryDetails.capital.join(', ') }}</p>
+    <p><strong>Area:</strong> {{ countryDetails.area }} km²</p>
+    <!-- Display other details as needed -->
+  </div>
 </template>
 
 <style scoped>

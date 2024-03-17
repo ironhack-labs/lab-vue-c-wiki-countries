@@ -19,4 +19,10 @@ import CountryDetails from '@/components/CountryDetails.vue'
 
 <style scoped>
 @import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css";
+
+.components {
+  display: flex;
+  flex-direction: row;
+}
+
 </style>
