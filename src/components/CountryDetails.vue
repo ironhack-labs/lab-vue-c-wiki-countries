@@ -32,22 +32,41 @@ const flagUrl = computed(() => {
 </script>
 
 <template>
-  <div v-if="countryDetails">
-    <img :src="flagUrl" alt="Flag" style="max-width: 100px" />
+  <div class="country-details">
+    <img :src="flagUrl" alt="Flag" class="country-flag" />
     <h1>{{ countryDetails.name.common }}</h1>
-    <p><strong>Capital:</strong> {{ countryDetails.capital.join(', ') }}</p>
-    <p><strong>Area:</strong> {{ countryDetails.area }} km²</p>
-    <p>
-      <strong>Borders:</strong>
-      <span v-if="countryDetails.borders.length > 0">
-        <span v-for="(border, index) in countryDetails.borders" :key="border">
-          <router-link :to="`/${border}`">{{ getCountryName(border) }}</router-link>
-          <span v-if="index !== countryDetails.borders.length - 1">, </span>
-        </span>
-      </span>
-      <span v-else>
-        None
-      </span>
-    </p>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Capital</th>
+          <td>{{ countryDetails.capital.join(', ') }}</td>
+        </tr>
+        <tr>
+          <th>Area</th>
+          <td>{{ countryDetails.area }} km²</td>
+        </tr>
+        <tr>
+          <th>Borders</th>
+          <td v-if="countryDetails.borders.length > 0">
+            <ul>
+              <li v-for="(border, index) in countryDetails.borders" :key="border">
+                <router-link :to="`/${border}`" class="border-link">{{ getCountryName(border) }}</router-link>
+              </li>
+            </ul>
+          </td>
+          <td v-else>
+            None
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
+
+<style scoped>
+
+.country-flag {
+  width: 600px;
+}
+
+</style>
