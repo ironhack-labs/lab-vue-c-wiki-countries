@@ -1,23 +1,17 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { fetchCountryData } from '@/js/countryData.js';
 
 const data = ref({});
 
-async function _getCountries() {
-  try {
-    const response = await fetch('https://ih-countries-api.herokuapp.com/countries');
-    const json = await response.json();
-    data.value = json;
-  } catch (error) {
-    console.error('Error fetching countries:', error);
-  }
-}
+onMounted(async () => {
+  data.value = await fetchCountryData();
+});
 
 const getFlagUrl = (alpha2Code) => {
   return `https://flagpedia.net/data/flags/icon/72x54/${alpha2Code.toLowerCase()}.png`;
 }
 
-onMounted(_getCountries);
 </script>
 
 <template class="container">
@@ -30,7 +24,7 @@ onMounted(_getCountries);
         </div>
       </div>
     </div>
-    <div>
+    <div class="col-7">
       <router-view />
     </div>
   </div>
