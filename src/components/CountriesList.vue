@@ -30,4 +30,5 @@ const getFlagUrl = (alpha2Code) => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
