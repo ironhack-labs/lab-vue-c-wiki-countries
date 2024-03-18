@@ -1,10 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
 
 const countries = ref([]);
 
-onMounted(async () => {
+const fetchCountryDetails = async () => {
   try {
     const response = await fetch('https://ih-countries-api.herokuapp.com/countries');
     const data = await response.json();
@@ -12,6 +11,10 @@ onMounted(async () => {
   } catch (error) {
     console.error("Error fetching countries:", error);
   }
+};
+
+onMounted(() => {
+  fetchCountryDetails();
 });
 
 </script>
@@ -29,3 +32,19 @@ onMounted(async () => {
   </div>
   <RouterView />
 </template>
+
+<style>
+.list-group-item {
+  padding: 0;
+}
+.list-group-item a {
+  padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.router-link-exact-active {
+  background-color: #0D6EFD;
+  color: #FFF;
+}
+</style>
