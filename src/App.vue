@@ -11,8 +11,7 @@ import CountryDetails from '@/components/CountryDetails.vue'
   <div class="app">
     <Navbar />
     <div class="components">
-    <CountriesList />
-    <CountryDetails />
+      <router-view />
   </div>
   </div>
 </template>

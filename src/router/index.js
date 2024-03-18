@@ -3,12 +3,12 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/",
-    name: "CountriesList",
+    name: "list",
     component: () => import("@/components/CountriesList.vue"),
     children: [
       {
         path: "/:alpha3Code",
-        name: "CountryDetails",
+        name: "details",
         component: () => import("@/components/CountryDetails.vue"),
       },
     ],

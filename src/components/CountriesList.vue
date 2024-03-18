@@ -30,6 +30,9 @@ onMounted(_getCountries);
         </div>
       </div>
     </div>
+    <div>
+      <router-view />
+    </div>
   </div>
 </template>
 
