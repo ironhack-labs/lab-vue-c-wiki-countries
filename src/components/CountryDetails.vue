@@ -1,73 +1,52 @@
-<script setup>
-
-import { ref, onMounted, watch } from 'vue'; //importa le funzioni necessarie da vue e da vue router
-import { useRoute } from 'vue-router';
-
-const route = useRoute(); // funzione che si utilizza per otternere d'oggetto della route attuale
-const country = ref(null); //si definisce la variabile reattiva country, che sara utilizzata nel componente per memorizzare info relative al paese corrente
-
-const fetchCountryDetails = async (alpha3Code) => {
-  alpha3Code = alpha3Code.toUpperCase();
-  try {
-    const response = await fetch('https://ih-countries-api.herokuapp.com/countries');
-    const data = await response.json();
-    country.value = data.find(c => c.alpha3Code === alpha3Code);
-  } catch (error) {
-    console.error("Error fetching country details:", error);
-  }
-};
-onMounted(() => {
-  fetchCountryDetails(route.params.alpha3Code);
-});
-
-watch(() => route.params.alpha3Code, (newAlpha3Code) => {
-  fetchCountryDetails(newAlpha3Code);
-});
-
-watch(country, () => {
-  console.log(country); 
-});
-
-</script>
 <template>
-    <div class="col-7" v-if="country">
-       <img
-        :src="`https://flagpedia.net/data/flags/icon/72x54/${country.alpha2Code.toLowerCase()}.png`"
-        :alt="`Flag of ${country.name.common}`"
-        style="width: 50px"
-      /> 
-      
-      <h1>{{ country.name.common }}</h1>
-      <table class="table">
-        <thead></thead>
-        <tbody>
-          <tr>
-            <td style="width: 30%">Capital</td>
-            <td>{{ country.capital[0] }}</td>
-          </tr>
-          <tr>
-            <td>Area</td>
-            <td>{{ country.area }} km <sup>2</sup></td>
-          </tr>
-          <tr>
-            <td>Borders</td>
-            <td>
-              <ul>
-                <li v-for="border in country.borders" :key="border">{{ border }}</li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </template>
-<!--<template>
-    <div class="row">
-        <section class="col-7">
-            <h1>HOLA</h1>
-        </section>
-    </div>
+  <div v-if="country">
+    <img :src="flagUrl" alt="Flag" style="max-width: 100px" />
+    <h1>{{ country.name.common }}</h1>
+    <p><strong>Capital:</strong> {{ country.capital.join(', ') }}</p>
+    <p><strong>Area:</strong> {{ country.area }} km²</p>
+    <p>
+      <strong>Borders:</strong>
+      <span v-if="country.borders.length > 0">
+        <span v-for="(border, index) in country.borders" :key="border">
+          <router-link :to="`/${border}`">{{ getCountryName(border) }}</router-link>
+          <span v-if="index !== country.borders.length - 1">, </span>
+        </span>
+      </span>
+      <span v-else>
+        None
+      </span>
+    </p>
+  </div>
 </template>
 
-<style scoped></style>
--->
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { fetchCountryData } from '@/js/countryData.js';
+
+const countryData = ref([]);
+const route = useRoute();
+
+const fetchData = async () => {
+  countryData.value = await fetchCountryData();
+};
+
+onMounted(fetchData);
+
+const getCountryName = (alpha3Code) => {
+  const country = countryData.value.find(country => country.alpha3Code === alpha3Code);
+  return country ? country.name.common : '';
+};
+
+const flagUrl = computed(() => {
+  if (country.value) {
+    return `https://flagcdn.com/${country.value.alpha2Code.toLowerCase()}.svg`;
+  } else {
+    return '';
+  }
+});
+
+const country = computed(() => {
+  return countryData.value.find(country => country.alpha3Code === route.params.alpha3Code);
+});
+</script>

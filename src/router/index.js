@@ -4,12 +4,12 @@ const routes = [
   {
     path: "/",
     name: "list",
-    component: () => import("../components/CountriesList.vue"),
+    component: () => import("@/components/CountriesList.vue"),
     children: [
       {
-        path: "/list/:alpha3Code",
-        name: "list",
-        component: () => import("../components/CountryDetails.vue"),
+        path: "/:alpha3Code",
+        name: "details",
+        component: () => import("@/components/CountryDetails.vue"),
       },
     ],
   },
