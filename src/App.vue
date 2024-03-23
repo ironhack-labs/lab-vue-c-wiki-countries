@@ -1,38 +1,17 @@
 <script setup>
 
-import navbarVue from "@/components/navbar.vue";
-import CountriesListVue from "./components/CountriesList.vue";
-import CountryDetailsVue from "./components/CountryDetails.vue";
-
+import Navbar from '@/components/Navbar.vue'
 
 </script>
 
 <template>
-  <div class="app row">
-
-    <!-- {%NAVBAR SECTION} -->
-
-      <navbarVue />
-
-    <!-- {%CountriesListVue SECTION} -->
-    <div class="col-5 ">
-      <CountriesListVue />
-    </div>
-  
-
-    <!-- {%CountryDetailsVue SECTION} -->
-    <div class="col-7">
-      <CountryDetailsVue />
-    </div>
+  <div class="app">
+    <Navbar />
+      <router-view />
   </div>
-
-
-
 </template>
 
+<style scoped>
+@import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css";
 
-<style scope>
-body {
-  width: 90%;
-}
 </style>

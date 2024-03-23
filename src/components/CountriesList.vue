@@ -1,43 +1,50 @@
-<script setup>
-
-import { ref, onMounted,watch } from 'vue';
-
-const countries = ref([]); //definisce una variabile reattiva, memorizza i dati dei paesi ottenuti dall'api
-
-const _getCountryList = async () => { //definiamo una funzione asincrona
-    const response = await fetch('https://ih-countries-api.herokuapp.com/countries'); //fa una richiesta get utilizzando la funzione fetch e guarda dentro a responde il risultato della richiesta 
-    const data = await response.json(); //prende la responde e la converte in formato json e la salva dentro a data
-    countries.value = data.sort((a, b) => a.name.common.localeCompare(b.name.common));
-}
-
-onMounted(() => {
-    _getCountryList();
-});
-
-</script>
-
 <template>
-    <div class="row ml-3">
-        <section class="col-5" style="max-height: 90vh; overflow: scroll">
-            <div class="list-group">
-                <router-link v-for="country in countries" :key="country.alpha3Code" :to="`/list/${country.alpha3Code}`" class="list-group-item">
-                    <img :src="`https://flagpedia.net/data/flags/icon/72x54/${country.alpha2Code.toLowerCase()}.png`"
-                        style="width: 50px" />
-                    <p>{{ country.name.common }}</p>
-                </router-link>
-            </div>
-        </section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5" style="max-height: 90vh; overflow: auto">
+        <div class="list-group">
+          <div v-for="country in Object.values(data)" :key="country.alpha3Code" class="list-group-item list-group-item-action">
+            <img :src="getFlagUrl(country.alpha2Code)" alt="Flag" class="flag-icon" />
+            <router-link :to="`/${country.alpha3Code}`" class="country-link">{{ country.name.common }}</router-link>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <router-view />
+      </div>
     </div>
-
+  </div>
 </template>
 
-<style scoped>
-a {
-    text-decoration: none;
-    color: black;
+<script setup>
+import { ref, onMounted } from 'vue';
+import { fetchCountryData } from '@/js/countryData.js';
+
+const data = ref({});
+
+onMounted(async () => {
+  data.value = await fetchCountryData();
+});
+
+const getFlagUrl = (alpha2Code) => {
+  return `https://flagpedia.net/data/flags/icon/72x54/${alpha2Code.toLowerCase()}.png`;
 }
-.list-group-item {
-  padding: 0;
+</script>
+
+<style scoped>
+.flag-icon {
+  width: 36px;
+  height: auto;
+  margin-right: 10px;
 }
 
+.country-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.list-group-item {
+  display: flex;
+  align-items: center;
+}
 </style>
