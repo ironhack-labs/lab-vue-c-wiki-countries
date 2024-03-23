@@ -4,6 +4,9 @@ import { ref } from 'vue';
 import Navbar from './components/Navbar.vue';
 import CountryDetails from './components/CountryDetails.vue';
 import CountriesList from './components/CountriesList.vue';
+import countries from '../public/countries.json';
+
+console.log(countries);
 
 </script>
 
@@ -31,7 +34,8 @@ import CountriesList from './components/CountriesList.vue';
           <!-- Bootstrap row wrapper div -->
           <div class="row">
 
-            <CountriesList />
+
+            <CountriesList :countries="countries" />
 
             <CountryDetails />
 
