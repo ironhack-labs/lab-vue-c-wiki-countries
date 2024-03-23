@@ -1,13 +1,15 @@
 <template>
-  <div class="app">
-
-  </div>
+  <NavBar/>
+  <RouterView/>
 </template>
 
-<script>
+<script setup>
+
+  import NavBar from 'c:/Users/monts/Desktop/ironhack/vue/lab-vue-c-wiki-countries/src/components/NavBar.vue'
+
 
 </script>
 
-<style>
+<style scoped>
 
 </style>
