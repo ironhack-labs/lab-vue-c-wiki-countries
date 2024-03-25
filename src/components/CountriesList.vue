@@ -1,12 +1,14 @@
 <script setup>
 import { fetchAllCountries } from "@/api/countriesApi";
 import { ref, onMounted } from 'vue'
+import axios from 'axios';
 
 const countries = ref([])
 let loading = ref(true)
 
 onMounted(async () => {
-    countries.value = await fetchAllCountries()
+    const response = await axios.get('https://ih-countries-api.herokuapp.com/countries');
+    countries.value = response.data;
     loading.value = false
     console.log(countries.value)
 })
