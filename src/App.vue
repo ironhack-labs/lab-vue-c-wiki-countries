@@ -25,19 +25,15 @@ console.log(countries);
   <body>
     <div class="app">
       <!-- Example of what could be rendered -->
-
       <div>
         <!-- Navbar -->
         <Navbar title="LAB -" />
+
         <!-- Bootstrap container wrapper div -->
         <div class="container">
           <!-- Bootstrap row wrapper div -->
           <div class="row">
-
-
-            <CountriesList :countries="countries" />
-
-            <CountryDetails />
+            <router-view />
 
           </div>
         </div>
@@ -49,4 +45,6 @@ console.log(countries);
 
 </template>
 
-<style></style>
+<style scoped>
+@import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css";
+</style>
