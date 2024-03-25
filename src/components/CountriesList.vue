@@ -1,24 +1,12 @@
 <script setup>
-import { fetchAllCountries } from "@/api/countriesApi";
-import { ref, onMounted } from 'vue'
-import axios from 'axios';
+import { inject } from 'vue'
 
-const countries = ref([])
-let loading = ref(true)
-
-onMounted(async () => {
-    const response = await axios.get('https://ih-countries-api.herokuapp.com/countries');
-    countries.value = response.data;
-    loading.value = false
-    console.log(countries.value)
-})
-
+const countries = inject('countries')
 
 </script>
 <template>
-    <div v-if="loading">Loading...<br>
-    </div>
-    <div v-else>
+
+    <div>
         <!-- Bootstrap container wrapper div -->
         <div class="container">
             <!-- Bootstrap row wrapper div -->
