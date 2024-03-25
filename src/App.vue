@@ -1,6 +1,7 @@
 <script setup>
 import NavBar from "@/components/Navbar.vue"
 import { ref, provide, onMounted } from 'vue'
+import axios from 'axios'
 
 const countries = ref([]);
 
