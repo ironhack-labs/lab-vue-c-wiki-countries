@@ -1,7 +1,8 @@
 <script setup>
-import countries from "@/countries.json"
 import { useRoute } from 'vue-router'
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, inject } from 'vue'
+
+const countries = inject('countries')
 
 const route = useRoute()
 
@@ -12,14 +13,11 @@ watch(() => route.params.alpha3Code, (newValue) => {
 })
 
 const country =  computed(() => {
-  return countries.find((country) => country.alpha3Code === alpha3Code.value)
+  return countries.value.find((country) => country.alpha3Code === alpha3Code.value)
 })
 
-console.log(country)
-
-
 function countryCommonName(alpha3Code) {
-  const countryData = countries.find(country => country.alpha3Code === alpha3Code)
+  const countryData = countries.value.find(country => country.alpha3Code === alpha3Code)
   return countryData.name.common
 }
 </script>

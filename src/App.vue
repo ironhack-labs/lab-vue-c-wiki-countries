@@ -11,7 +11,6 @@ onMounted(async () => {
 });
 
 provide('countries', countries);
-
 </script>
 
 <template>

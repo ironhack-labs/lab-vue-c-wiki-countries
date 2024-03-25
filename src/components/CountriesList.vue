@@ -2,7 +2,6 @@
 import { inject } from 'vue'
 
 const countries = inject('countries')
-
 </script>
 <template>
 
