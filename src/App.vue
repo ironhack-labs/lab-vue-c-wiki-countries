@@ -5,9 +5,8 @@ import { ref, provide, onMounted } from 'vue'
 const countries = ref([]);
 
 onMounted(async () => {
-  const response = await fetch('https://ih-countries-api.herokuapp.com/countries');
-  const data = await response.json();
-  countries.value = data;
+  const response = await axios.get('https://ih-countries-api.herokuapp.com/countries');
+  countries.value = response.data;
 });
 
 provide('countries', countries);
