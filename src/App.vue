@@ -1,13 +1,21 @@
-<template>
-  <div class="app">
+<script setup>
+import NavBar from "@/components/Navbar.vue"
+import { ref, provide, onMounted } from 'vue'
+import axios from 'axios'
 
-  </div>
-</template>
+const countries = ref([]);
 
-<script>
+onMounted(async () => {
+  const response = await axios.get('https://ih-countries-api.herokuapp.com/countries');
+  countries.value = response.data;
+});
 
+provide('countries', countries);
 </script>
 
-<style>
-
-</style>
+<template>
+  <div class="app">
+    <NavBar />
+    <router-view />
+  </div>
+</template>
