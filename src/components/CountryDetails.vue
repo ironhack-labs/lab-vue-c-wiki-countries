@@ -25,7 +25,7 @@ function countryCommonName(alpha3Code) {
 <template>
   <!-- Country Details (Bootstrap column) -->
   <div class="col-7">
-    <img :src="`https://restcountries.eu/data/${alpha3Code.toLowerCase()}.svg`" alt="country flag" />
+    <img :src="`https://flagpedia.net/data/flags/icon/72x54/${country.alpha2Code.toLowerCase()}.png`" alt="country flag" />
     <h1>{{ country.name.common }}</h1>
     <table class="table">
       <thead></thead>
