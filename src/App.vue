@@ -1,13 +1,17 @@
-<template>
-  <div class="app">
+<script setup>
 
-  </div>
-</template>
-
-<script>
+import {onMounted} from "vue";
+import NavBar from "./components/NavBar.vue"
+import CountriesList from './components/CountriesList.vue'
+import CountryDetails from './components/CountryDetails.vue'
 
 </script>
 
-<style>
+<template> 
+<div class="app">
+    <NavBar/>
+    <RouterView/>
+</div>
+</template>
 
-</style>
+
