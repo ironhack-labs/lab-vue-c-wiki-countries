@@ -1,13 +1,17 @@
-<template>
-  <div class="app">
-
-  </div>
-</template>
-
-<script>
+<script setup>
+import navbar from './components/navbar.vue';
+import CountriesList from './components/CountriesList.vue';
 
 </script>
 
-<style>
+<template>
+  <div>
+    <navbar/>
+    <div class="container">
+      <div class="row">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
+</template>
 
-</style>
