@@ -1,0 +1,10 @@
+[
+  {
+    "name": { "common": "España" },
+    "alpha2Code": "ES",
+    "alpha3Code": "ESP",
+    "capital": ["Madrid"],
+    "area": 505992,
+    "borders": ["AND", "FRA", "GIB", "PRT", "MAR"]
+  }
+]
