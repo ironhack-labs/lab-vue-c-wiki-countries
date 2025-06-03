@@ -1,13 +1,15 @@
-<template>
-  <div class="app">
+<!-- src/App.vue -->
 
+<script setup>
+import NavBar from './components/NavBar.vue';
+</script>
+
+<template>
+  <div id="app">
+    <NavBar />
+    <router-view />
   </div>
 </template>
 
-<script>
 
-</script>
 
-<style>
-
-</style>
