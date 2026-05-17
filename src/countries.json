@@ -1,0 +1,22 @@
+[
+  {
+    "name": {
+      "common": "France"
+    },
+    "alpha3Code": "FRA",
+    "alpha2Code": "FR",
+    "capital": ["Paris"],
+    "area": 551695,
+    "borders": ["ESP", "DEU", "ITA"]
+  },
+  {
+    "name": {
+      "common": "Germany"
+    },
+    "alpha3Code": "DEU",
+    "alpha2Code": "DE",
+    "capital": ["Berlin"],
+    "area": 357022,
+    "borders": ["FRA", "POL"]
+  }
+]
